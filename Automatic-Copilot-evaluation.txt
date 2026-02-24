@@ -1,0 +1,231 @@
+===============================================================
+  AUTOMATIC COPILOT EVALUATION – TA GRADING REPORT
+  Course: Digital Transformation and Enterprise Architecture
+  Topic:  Stellar Luminosity – Regression from First Principles
+===============================================================
+
+--------------------------------------------------------------
+SUMMARY
+--------------------------------------------------------------
+The repository is well-structured and addresses both parts of the
+assignment competently. Notebook 1 implements linear regression from
+scratch (hypothesis, MSE, cost surface, gradient derivation, non-
+vectorized and vectorized gradient descent, convergence plot, multi-
+learning-rate experiments, final fit, and conceptual discussion).
+Notebook 2 implements polynomial regression with two features,
+including feature engineering, vectorized training, model comparison
+(M1/M2/M3), interaction-coefficient sweep, and an inference demo.
+The README provides clear SageMaker execution evidence with
+screenshots and a thorough local-vs-cloud discussion. All required
+mandatory elements are present. Only minor issues were noted:
+the dataset is tiny (10 points), a %pip install cell is included
+that is technically unnecessary given the constraint, and a brief
+mix of Spanish/English commentary appears in Notebook 1.
+
+--------------------------------------------------------------
+GRADING BREAKDOWN (0.0 – 5.0 scale)
+--------------------------------------------------------------
+
+1. Repository Structure & Compliance              4.5 / 5.0 → 0.45 / 0.5
+   ---------------------------------------------------------------
+   - README.md present:                           ✓
+   - Two notebooks (Part I and Part II):          ✓
+   - Datasets defined inside notebooks:           ✓
+   - Only allowed libraries (NumPy, Matplotlib):  ✓ (pandas imported in %pip
+     install cell comment but not used in code; no scikit-learn/TF/etc.)
+   - Minor deduction: a `%pip install` cell is present, which is not
+     strictly prohibited but is unnecessary given the constraints
+     (libraries are already available). -0.05
+   Score: 0.45 / 0.5
+
+2. Notebook 1 – Linear Regression (One Feature)   1.85 / 2.0
+   ---------------------------------------------------------------
+   a. Dataset visualization and interpretation:   ✓
+      - Scatter plot of M vs L produced; non-linearity noted.
+   b. Hypothesis and MSE implementation:           ✓
+      - predict() and compute_cost() correctly implemented.
+   c. Cost surface (MANDATORY):                    ✓
+      - 3D/contour grid evaluated over (w, b); plotted and explained.
+   d. Gradient derivation:                         ✓
+      - dJ/dw and dJ/db correctly derived and implemented.
+   e. Non-vectorized gradient descent:             ✓
+      - Explicit loop over samples implemented.
+   f. Vectorized gradient descent:                 ✓
+      - NumPy vectorized version implemented and used.
+   g. Convergence plot (MANDATORY):                ✓
+      - Loss vs. iteration plotted and discussed; stable convergence shown.
+   h. Multiple learning-rate experiments (MANDATORY, ≥3): ✓
+      - Three rates (0.001, 0.01, 0.05) compared; final w, b, loss reported.
+   i. Final fit plot and error discussion:         ✓
+      - Regression line plotted over data; systematic under/overfit noted.
+   j. Conceptual understanding (meaning of w, limits of linearity): ✓
+      - Both questions answered adequately.
+   Minor deductions:
+   - A few markdown cells appear in both English and Spanish, suggesting
+     minor inconsistency in the write-up. -0.05
+   - The convergence plot skips the first 15 iterations (cosmetic, but
+     the rationale is not explicitly stated in the cell). -0.05
+   - The non-vectorized GD function is implemented but it is not
+     explicitly run for a full descent (used only for a gradient check),
+     making the distinction slightly incomplete. -0.05
+   Score: 1.85 / 2.0
+
+3. Notebook 2 – Polynomial Regression (Two Features)  1.85 / 2.0
+   ---------------------------------------------------------------
+   a. Visualization with temperature encoding:     ✓
+      - Scatter plot with color-mapped temperature values.
+   b. Feature engineering [M, T, M², M·T]:         ✓
+      - build_X() constructs the correct design matrix for each model.
+   c. Vectorized loss and gradients:               ✓
+      - compute_cost() and compute_gradient() use NumPy matrix ops.
+   d. Training and convergence plot:               ✓
+      - Gradient descent run for each model; cost history plotted.
+   e. Feature selection experiment M1/M2/M3 (MANDATORY): ✓
+      - All three models defined, trained, and results compared.
+   f. Interaction cost analysis – w_MT sweep (MANDATORY): ✓
+      - Cost vs. interaction coefficient swept and plotted; convexity noted.
+   g. Inference example and interpretation (MANDATORY): ✓
+      - New star (M=1.3, T=6600) predicted; result contextualised.
+   Minor deductions:
+   - Feature scaling is applied, which is good practice, but the
+     connection between scaled and unscaled parameters could be better
+     explained to the reader. -0.05
+   - The M1/M2/M3 quantitative comparison (e.g., a summary table of
+     final costs or R^2 values) would strengthen the discussion but is
+     only described qualitatively. -0.05
+   - The cost-surface/contour plot for the 2-feature case (analogous to
+     Notebook 1's mandatory plot) is not produced; only the w_MT sweep
+     is shown. This is a minor gap. -0.05
+   Score: 1.85 / 2.0
+
+4. Cloud Execution Evidence (SageMaker)            0.5 / 0.5
+   ---------------------------------------------------------------
+   - Description of SageMaker execution:          ✓
+   - Screenshots of notebooks in SageMaker:       ✓ (images/i3.png, i4.png)
+   - Screenshots of successful execution:         ✓ (images/i2.png)
+   - At least one plot rendered in SageMaker:     ✓ (images/i5.png)
+   - Local vs. cloud comparison:                  ✓ (Section 5, detailed)
+   Score: 0.5 / 0.5
+
+--------------------------------------------------------------
+FINAL GRADE
+--------------------------------------------------------------
+  Repository structure & compliance :  0.45 / 0.50
+  Notebook 1 – Linear regression    :  1.85 / 2.00
+  Notebook 2 – Polynomial regression:  1.85 / 2.00
+  Cloud execution evidence           :  0.50 / 0.50
+  ─────────────────────────────────────────────────
+  Total                              :  4.65 / 5.00
+
+Final grade: 4.65 / 5.0
+
+Result: PASS  (≥ 3.0)
+
+--------------------------------------------------------------
+STRENGTHS
+--------------------------------------------------------------
+• All mandatory elements are present and functional: cost surface,
+  convergence plots, ≥3 learning-rate experiments, M1/M2/M3 comparison,
+  w_MT sweep, and inference demo.
+• Both vectorized and non-vectorized gradient descent are implemented,
+  demonstrating understanding at two levels of abstraction.
+• Feature engineering is correct: design matrix includes M, T, M², and M·T.
+• Feature scaling is applied before training, showing awareness of
+  numerical stability.
+• The SageMaker section is thorough: step-by-step setup instructions,
+  multiple screenshots, and a substantive local-vs-cloud comparison.
+• Conceptual questions (meaning of w, limits of linearity) are answered
+  correctly and with astrophysical context.
+• Inference demo for a new data point is well-contextualised.
+
+--------------------------------------------------------------
+ISSUES & MISSING ELEMENTS
+--------------------------------------------------------------
+• A %pip install cell is included; this is unnecessary under the
+  constraint that only NumPy and Matplotlib are allowed and is slightly
+  inconsistent with the "no external installs" spirit of the assignment.
+• Notebook 1 mixes Spanish and English in some markdown cells, reducing
+  professional consistency of the write-up.
+• The first 15 iterations are silently skipped in the convergence plot
+  without a clear explanation in the accompanying text.
+• In Notebook 1, the non-vectorized GD is used only for a spot-check of
+  gradients rather than running a full descent loop; the distinction in
+  practice is therefore not fully demonstrated.
+• In Notebook 2, a quantitative summary table comparing M1/M2/M3 final
+  costs would make the model selection discussion more rigorous.
+• A 2D cost surface or contour plot analogous to Notebook 1's mandatory
+  section is absent in Notebook 2.
+
+--------------------------------------------------------------
+TA FEEDBACK TO STUDENT
+--------------------------------------------------------------
+Overall, this is a solid submission that demonstrates a genuine
+understanding of regression from first principles. All mandatory
+elements are present, the code is correct and well-organised, and the
+SageMaker evidence is among the strongest parts of the work.
+
+To improve further:
+1. Remove the %pip install cell or replace it with a comment; it
+   conflicts with the "only allowed libraries" constraint.
+2. Standardise the language of your markdown explanations; mixing
+   Spanish and English within a single notebook hurts readability.
+3. In Notebook 1, either run a complete descent using the non-vectorized
+   function or clarify in a comment why only the gradient-check variant
+   is shown.
+4. In Notebook 2, add a brief table (even a printed dictionary or simple
+   print statement) summarising the final costs for M1, M2, and M3 side-
+   by-side so the reader can see the improvement numerically.
+5. Consider adding a note explaining why the first 15 iterations are
+   omitted from the convergence plot.
+
+These are minor points. The foundations are strong and the cloud
+execution is well-documented. Good work.
+
+--------------------------------------------------------------
+AI-GENERATION ASSESSMENT  (NON-GRADING – INFORMATIVE ONLY)
+--------------------------------------------------------------
+
+A. Qualitative Assessment
+   Indicators of AI generation:
+   - Markdown explanations are uniformly structured and polished,
+     with consistent formatting across cells (bold headers, bullet
+     points, "Conclusion from …" labels in every section).
+   - Explanations are technically accurate but somewhat generic;
+     they closely follow textbook phrasing rather than reflecting
+     personal discovery or surprise.
+   - The level of sophistication in the prose is notably higher than
+     in the code, which is characteristic of AI-assisted write-ups.
+   - Feature scaling and unscaling are included without explicit
+     assignment requirements, suggesting tool-assisted code generation.
+
+   Indicators of human work:
+   - There are minor inconsistencies (Spanish/English mix in Notebook 1)
+     that suggest at least some manual editing.
+   - The %pip install cell is an idiosyncrasy that reflects a human
+     working iteratively in a real environment.
+   - The choice of learning rates (0.001, 0.01, 0.05) and dataset
+     values are specific and consistent with manual experimentation.
+   - Some cells contain brief inline comments in a more casual tone
+     (e.g., "# Crear la malla") that suggest personal interaction.
+
+B. Quantitative Estimate
+   Code:              ~55% AI involvement
+   Explanations/markdown: ~75% AI involvement
+   README:            ~65% AI involvement
+
+C. Commentary
+   The repository shows hallmarks of a hybrid workflow: the core
+   algorithmic structure and markdown explanations appear to be
+   substantially assisted by a generative AI tool, while the specific
+   parameter choices, dataset definitions, and minor inconsistencies
+   suggest genuine human involvement and experimentation. The README is
+   well-written and organised but follows a predictably formal template.
+   This is consistent with a student who used an AI assistant for
+   scaffolding and explanation while conducting the actual experiments
+   themselves.
+
+   This assessment is observational and does not imply misconduct.
+
+===============================================================
+  END OF REPORT
+===============================================================
